@@ -120,8 +120,7 @@ def make_slug(title):
     '''
     Превращает название в слаг вида "the-quiet-algorithm".
     '''
-    words = title.split()
-    return "-".join(word.lower() for word in words) # соединяет через дефис в нижнем регистре
+    return title.lower().replace(" ", "-")
 
 def format_report_line(movie):
     genres = ", ".join(sorted(movie["genres"]))
