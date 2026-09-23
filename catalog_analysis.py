@@ -123,10 +123,11 @@ def make_slug(title):
     return title.lower().replace(" ", "-")
 
 def format_report_line(movie):
+
+    title = movie["title"]
+    year = movie["year"]
+    rating = movie["rating"]
+    duration = duration_in_hours(movie["duration_min"])
     genres = ", ".join(sorted(movie["genres"]))
-    return (
-        f"{movie['title']} ({movie['year']}) — "
-        f"{movie['rating']} — "
-        f"{movie['duration_min']} мин — "
-        f"{genres}"
-    )
+
+    return f'"{title}" ({year}) — {rating}/10, {duration}, жанры: {genres}'
