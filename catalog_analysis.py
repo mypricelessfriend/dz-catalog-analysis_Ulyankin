@@ -83,8 +83,8 @@ def decade_label(year):
             return "старые"
 
 for movie in movies:
-    if movie["genre"] == "comedy":
-        continue                      # пропускает комедии
+    if "comedy" in movie["genres"]:
+        continue
     print(movie["title"]) # выводит все НЕ комедии
 
 i = 0
