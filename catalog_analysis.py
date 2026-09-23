@@ -57,3 +57,41 @@ def duration_in_hours(minutes):
     hours = minutes // 60
     mins = minutes % 60
     return f"{hours}ч {mins}м"
+
+def rating_tier(rating):
+    '''
+    Возвращает оценку рейтингу фильма
+    '''
+    if rating >= 9:
+        return "шедевр"
+    if rating >= 7:
+        return "хорошо"
+    if rating >= 5:
+        return "средне"
+    return "слабо" if rating >= 0 else "некорректно"
+
+def decade_label(year):
+    """
+    Возвращает оценку по году выпуска.
+    """
+    match year:
+        case y if y > 2020:
+            return "новые"
+        case y if 2015 <= y <= 2020:
+            return "недавние"
+        case _:
+            return "старые"
+
+for movie in movies:
+    if movie["genre"] == "comedy":
+        continue                      # пропускает комедии
+    print(movie["title"]) # выводит все НЕ комедии
+
+i = 0
+while i < len(movies): # двигает индекс пока не найдет первый шедевр в списке
+    if movies[i]["rating"] > 9.0: 
+        print(f"Найден шедевр: {movies[i]['title']}")
+        break
+    i += 1
+else:
+    print("Шедевров не найдено")
