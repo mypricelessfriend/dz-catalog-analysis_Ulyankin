@@ -1,3 +1,5 @@
+###Этап 1. Разминка: переменные, числа, math
+
 import math 
 # список фильмов
 movies = [
@@ -58,6 +60,8 @@ def duration_in_hours(minutes):
     mins = minutes % 60
     return f"{hours}ч {mins}м"
 
+### Этап 2. Условия и match
+
 def rating_tier(rating):
     '''
     Возвращает оценку рейтингу фильма
@@ -82,6 +86,8 @@ def decade_label(year):
         case _:
             return "старые"
 
+### Этап 3. Циклы
+
 for movie in movies:
     if "comedy" in movie["genres"]:
         continue
@@ -105,6 +111,8 @@ def count_long_movies(movies, threshold=120):
         if movie["duration"] > threshold:
             count += 1 # счетчик выполнения условия
     return count
+
+### Этап 4. Строки
 
 def normalize_title(title):
     '''
@@ -131,3 +139,5 @@ def format_report_line(movie):
     genres = ", ".join(sorted(movie["genres"]))
 
     return f'"{title}" ({year}) — {rating}/10, {duration}, жанры: {genres}'
+
+### Этап 5. Списки
