@@ -1,5 +1,5 @@
 import math 
-
+# список фильмов
 movies = [
     {"title": "The Dune Chronicles", "year": 2021, "genres": {"sci-fi", "drama"},
      "rating": 8.6, "duration_min": 155, "actors": ["T. Chalamet", "R. Ferguson", "O. Isaac"]},
@@ -24,9 +24,36 @@ movies = [
 ]
 
 def average_rating(movies):
+    '''
+     Возвращает среднюю оценку по каталогу фильмов,
+    округлённую до одного знака.
+    '''
     if not movies:
         return 0
-    total = sum(movie["rating"] for movie in movies)
+    total = sum(movie["rating"] for movie in movies) # сумма рейтингов в movies
     return round(total / len(movies), 1)
 
-print(average_rating(movies))
+def catalog_age_stats(movies, current_year=2026):
+    '''
+    Возвращает кортеж (возраст самого старого фильма,
+    возраст самого нового фильма, средний возраст),
+    где средний возраст округлён вверх до целого.
+    '''
+    if not movies:
+        return None
+
+    ages = [current_year - movie["year"] for movie in movies]
+
+    oldest = max(ages)   # самый старый = наибольший возраст
+    newest = min(ages)   # самый новый = наименьший возраст
+    average = math.ceil(sum(ages) / len(ages))
+
+    return (oldest, newest, average)
+
+def duration_in_hours(minutes):
+    '''
+    Переводит минуты в формат  "X часов Y минут"
+    '''
+    hours = minutes // 60
+    mins = minutes % 60
+    return f"{hours}ч {mins}м"
