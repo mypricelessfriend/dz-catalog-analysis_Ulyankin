@@ -106,4 +106,12 @@ def count_long_movies(movies, threshold=120):
             count += 1 # счетчик выполнения условия
     return count
 
-
+def normalize_title(title):
+    '''
+    Приводит строку в формат Title Case
+    '''
+    words = title.split() # разбивает строку по пробелам
+    normalized = []
+    for word in words:
+        normalized.append(word[0].upper() + word[1:]) # делает первую букву заглавной
+    return " ".join(normalized) # собирает строку обратно через пробел
