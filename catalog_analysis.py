@@ -95,3 +95,15 @@ while i < len(movies): # двигает индекс пока не найдет 
     i += 1
 else:
     print("Шедевров не найдено")
+
+def count_long_movies(movies, threshold=120):
+    '''
+    Считает количество фильмов длинее threshold минут
+    '''
+    count = 0 # накопительная переменная
+    for movie in movies:
+        if movie["duration"] > threshold:
+            count += 1 # счетчик выполнения условия
+    return count
+
+
