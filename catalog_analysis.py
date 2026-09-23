@@ -48,7 +48,7 @@ def catalog_age_stats(movies, current_year=2026):
 
     oldest = max(ages)   # самый старый = наибольший возраст
     newest = min(ages)   # самый новый = наименьший возраст
-    average = math.ceil(sum(ages) / len(ages))
+    average = math.ceil(sum(ages) / len(ages)) # среднеее арифметическое
 
     return (oldest, newest, average)
 
@@ -156,3 +156,37 @@ def top_n_by_rating(movies, n=3):
     '''
     sorted_movies = sorted(movies, key=lambda movie: movie["rating"], reverse=True) # та же сортировка и сравнение что и выше
     return [(movie["title"], movie["rating"]) for movie in sorted_movies[:n]] # срез по самым рейтинговым элементам, формирование кортежа
+
+### Этап 6. Словари
+
+def count_by_genre(movies):
+    '''
+    Возвращает словарь {жанр: количество фильмов}
+    '''
+    counts = {}
+    for movie in movies: 
+        for genre in movie["genres"]: # может быть больше одного жанра
+            counts[genre] = counts.get(genre, 0) + 1 # возвращает текущее значение или 0, прибавляет 1 и добавляет обратно в словарь
+    return counts
+
+def actor_filmography(movies):
+    '''
+    Возвращает словарь {актер: [список названий фильмов]}.
+    '''
+    filmography = {}
+    for movie in movies:
+        for actor in movie["actors"]: # может быть несколько актеров в одном фильме
+            filmography.setdefault(actor, []).append(movie["title"]) # возвращает текущий список фильмов актера, если актера нет, создает пустой сипсок и возвращает его
+    return filmography
+
+def above_average_movies(movies):
+    '''
+    Возвращает словарь {title: rating} только для фильмов
+    с рейтингом выше среднего.
+    '''
+    avg = average_rating(movies) # считает средний рейтинг из этапа 1
+    return {
+        movie["title"]: movie["rating"]
+        for movie in movies
+        if movie["rating"] > avg # строго больше среднего
+    }
