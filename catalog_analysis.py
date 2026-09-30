@@ -190,3 +190,21 @@ def above_average_movies(movies):
         for movie in movies
         if movie["rating"] > avg # строго больше среднего
     }
+
+### Этап 7. Множества
+
+def all_genres(movies):
+    result = set()
+    for m in movies:
+        result |= set(m["genres"]) # объединение через |=
+    return result
+
+def common_actors(movie1, movie2):
+    return set(movie1["actors"]) & set(movie2["actors"]) # возвращает только те элементы, которые есть и в первом, и во втором множестве
+
+def genres_only_in_one(movies_a, movies_b):
+    genres_a = set().union(*(set(m["genres"]) for m in movies_a))
+    genres_b = set().union(*(set(m["genres"]) for m in movies_b))
+    return genres_a - genres_b
+
+ 
