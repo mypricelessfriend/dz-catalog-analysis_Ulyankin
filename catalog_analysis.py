@@ -207,4 +207,16 @@ def genres_only_in_one(movies_a, movies_b):
     genres_b = set().union(*(set(m["genres"]) for m in movies_b))
     return genres_a - genres_b
 
- 
+ ### Этап 8. Итераторы и генераторы
+
+def iter_high_rated(movies, min_rating=8.0):
+    for m in movies:
+        if m["rating"] >= min_rating:
+            yield m
+
+for movie in iter_high_rated(movies):
+    print(movie["title"], movie["rating"])
+
+total = sum(m["duration_min"] for m in movies if m["rating"] > 7)
+
+
