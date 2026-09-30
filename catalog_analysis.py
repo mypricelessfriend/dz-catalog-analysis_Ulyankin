@@ -219,4 +219,34 @@ for movie in iter_high_rated(movies):
 
 total = sum(m["duration_min"] for m in movies if m["rating"] > 7)
 
+### Этап 9. Итоговый отчет
 
+def build_report(movies):
+    # шапка
+    print("ОТЧЁТ ПО КАТАЛОГУ")
+    print(f"Средний рейтинг: {average_rating(movies)}")
+    print(f"Средний возраст фильмов: {catalog_age_stats(movies)[2]} лет")
+    print()
+
+    # топ-3
+    print("Топ-3 фильма:")
+    # titles_sorted_by_rating даёт список названий по убыванию рейтинга.
+    # Берём первые 3 и по названию находим полный словарь для format_report_line.
+    titles = titles_sorted_by_rating(movies)[:3]
+    by_title = {m["title"]: m for m in movies}
+    for title in titles:
+        print("  " + format_report_line(by_title[title]))
+    print()
+
+    # жанры по количеству
+    print("Фильмов по жанрам:")
+    counts = count_by_genre(movies)
+    # сортировка по убыванию количества, при равенстве по алфавиту
+    for genre, n in sorted(counts.items(), key=lambda kv: (-kv[1], kv[0])):
+        print(f"  {genre} — {n}")
+    print()
+
+    # все жанры одной строкой
+    print("Все жанры каталога: " + ", ".join(sorted(all_genres(movies))))
+
+build_report(movies)
